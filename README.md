@@ -26,3 +26,10 @@ git commit -m "Mensagem"
 ```bash
 git status
 ```
+
+Em primeiro lugar, configurar quem é o usuário(***nome***) e qual seu ***e-mail***.
+
+```bash
+git config --global user.name "nomedousuario"
+git config --global user.email email@email.com
+```
