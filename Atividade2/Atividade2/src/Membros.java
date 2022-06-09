@@ -19,11 +19,7 @@ public abstract class Membros implements PostarMensagem{
     public EnumFuncoes getFuncao() {
         return funcao;
     }
-
-    public void mudarTurno(){
-
-    }
-
+    
     @Override
     public String toString() {
         return "Members [email=" + email + ", funcao=" + funcao + ", nome=" + nome + "]";
