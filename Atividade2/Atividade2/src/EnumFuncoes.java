@@ -1,0 +1,3 @@
+public enum EnumFuncoes {
+     HEAVYLIFTERS, SCRIPTGUYS, MOBILEMEMBERS, BIGBROTHERS;
+}
