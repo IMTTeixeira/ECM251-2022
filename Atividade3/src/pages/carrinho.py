@@ -7,7 +7,6 @@ import time
 
 def layout_carrinho(product_carrinho):
     st.write('__________________________________________________________')
-    print(len(product_carrinho.getList()))
     for item in product_carrinho.getList():
         with st.container():
             colA, colB, colC, colD, colE = st.columns(5,gap = 'small')
@@ -61,7 +60,8 @@ try:
                     st.warning("Processando pagamento...")
                 if percent_complete == 99:
                     st.success("Compra finalizada!")
-                    st.session_state["carrinho"] = 0
+                    for i in range(len(st.session_state["carrinho"].getList())):
+                        st.session_state["carrinho"].getList().pop()
             
             
 
