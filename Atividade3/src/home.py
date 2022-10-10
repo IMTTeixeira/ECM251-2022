@@ -1,5 +1,4 @@
 from operator import truediv
-from turtle import onclick
 from models.carrinho import Carrinho
 import streamlit as st
 from controllers.user_controller import UserController
