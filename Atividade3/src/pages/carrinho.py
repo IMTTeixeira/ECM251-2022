@@ -5,7 +5,7 @@ from controllers.product_controller import ProductController
 import time
 
 
-def layout_carrinho(product_carrinho):
+def criar_carrinho(product_carrinho):
     st.write('__________________________________________________________')
     for item in product_carrinho.getList():
         with st.container():
@@ -32,7 +32,7 @@ def layout_carrinho(product_carrinho):
 try:
     if st.session_state.login:
         st.title("Carrinho")
-        layout_carrinho(st.session_state["carrinho"])
+        criar_carrinho(st.session_state["carrinho"])
         st.write('')
         st.write('')
         st.write('')

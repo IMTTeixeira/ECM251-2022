@@ -9,13 +9,8 @@ if "carrinho" not in st.session_state:
     
 if "quantidade" not in st.session_state:
     st.session_state["quantidade"] = 0
-if "quantidade2" not in st.session_state:
-    st.session_state["quantidade2"] = 0
-if "quantidade3" not in st.session_state:
-    st.session_state["quantidade3"] = 0
 
-
-def layout_produtos(product):
+def criar_produtos(product):
     colA, colB = st.columns(2)
     with colA:
         st.subheader(product.name)
@@ -35,7 +30,7 @@ def layout_produtos(product):
             )
         button = st.button("Adicionar ao carrinho", key = product.url)
         if button:
-            st.session_state["carrinho"].addProduct(product)
+            st.session_state["carrinho"].addProduct([product, quantidade])
             st.session_state["quantidade"] = quantidade
               
 if "login" not in st.session_state:
@@ -56,7 +51,7 @@ try:
         st.text("__________________________________________________________________________________________")   
        
         for i in range(len(ProductController().getProducts())):
-             layout_produtos(ProductController().getProducts()[i])
+             criar_produtos(ProductController().getProducts()[i])
              st.text("__________________________________________________________________________________________")
              st.write('')
              st.write('')          
