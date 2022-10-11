@@ -21,7 +21,7 @@ with col2:
         type = "password",
         
     )        
-    if st.button("Entrar"):
+    if st.button("Fazer Login"):
         user_controller = UserController()
         cond = False
         if user_controller.checkLogin(nome_usuario, senha_usuario):

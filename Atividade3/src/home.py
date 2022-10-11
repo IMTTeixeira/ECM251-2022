@@ -3,6 +3,7 @@ from models.carrinho import Carrinho
 import streamlit as st
 from controllers.user_controller import UserController
 from controllers.product_controller import ProductController
+
 if "carrinho" not in st.session_state:
     st.session_state["carrinho"] = Carrinho()
     
@@ -30,7 +31,13 @@ def criar_produtos(product):
         button = st.button("Adicionar ao carrinho", key = product.url)
         if button:
             st.session_state["carrinho"].addProduct(product)
-            st.session_state["quantidade"] = quantidade
+            if product.name == "The Beginning After the End":
+                Carrinho.q1 = quantidade
+            elif product.name == "One Piece":
+                Carrinho.q2 = quantidade
+            elif product.name == "Solo Leveling":
+                Carrinho.q3 = quantidade
+            # st.session_state["quantidade"] = quantidade
               
 if "login" not in st.session_state:
     st.session_state.login = False
@@ -42,7 +49,7 @@ try:
             
             st.image(
             image = "https://cdn.iconscout.com/icon/free/png-256/crunchyroll-4062809-3357695.png",
-            width = 75,
+            width = 80,
             )
             st.title("Mangá Store")
             
