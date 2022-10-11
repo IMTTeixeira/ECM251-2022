@@ -62,6 +62,7 @@ try:
                     st.success("Compra finalizada!")
                     for i in range(len(st.session_state["carrinho"].getList())):
                         st.session_state["carrinho"].getList().pop()
+                    st.write("Agradecemos por comprar na Mangá Store!")
             
             
 
