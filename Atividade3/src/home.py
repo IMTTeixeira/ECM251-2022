@@ -29,7 +29,7 @@ def criar_produtos(product):
             )
         button = st.button("Adicionar ao carrinho", key = product.url)
         if button:
-            st.session_state["carrinho"].addProduct([product, quantidade])
+            st.session_state["carrinho"].addProduct(product)
             st.session_state["quantidade"] = quantidade
               
 if "login" not in st.session_state:
