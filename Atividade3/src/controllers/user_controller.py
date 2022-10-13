@@ -15,11 +15,11 @@ class UserController():
         return user in self.users
 
     def checkLogin(self, name, password):
-        user_teste = User(name=name, password=password, email=None)
+        user_checker = User(name=name, password=password, email=None)
         for user in self.users:
-            if user.name == user_teste.name and user.password == user_teste.password:
+            if user.name == user_checker.name and user.password == user_checker.password:
                 
-                return True            
+                return True           
         return False
     
     

@@ -10,7 +10,7 @@ if "carrinho" not in st.session_state:
     st.session_state["carrinho"] = Carrinho()
     
 if "quantidade" not in st.session_state:
-    st.session_state["quantidade"] = 0
+    st.session_state["quantidade"] = []
 
 def criar_produtos(product):
     colA, colB = st.columns(2)
@@ -33,7 +33,7 @@ def criar_produtos(product):
         button = st.button("Adicionar ao carrinho", key = product.url)
         if button:
             st.session_state["carrinho"].addProduct(product)
-            st.session_state["quantidade"] = quantidade
+            st.session_state["quantidade"].append(quantidade)
               
 if "login" not in st.session_state:
     st.session_state.login = False
@@ -70,10 +70,13 @@ try:
             st.subheader("Bem vindo à melhor loja de mangás do Brasil!")        
 
     else:
-        st.title("Bem vindo a Mangá Store!")
-        st.text("__________________________________________________________")
-        st.text(" ")    
-        st.write("Para ter acesso a loja, faça o login!")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.image("https://cdn.iconscout.com/icon/free/png-256/crunchyroll-4062809-3357695.png", width = 100)
+        with col2:
+            st.title("Bem vindo a Mangá Store!")
+            st.text(" ")    
+            st.write("Para ter acesso a loja, faça o login!")
         
 except:
     print("Erro")

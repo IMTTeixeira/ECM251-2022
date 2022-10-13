@@ -15,7 +15,7 @@ class Carrinho():
     
     def getQuantidade(self):
         for i in range(len(self.products)):
-            self.quantidade = st.session_state["quantidade"]
+            self.quantidade = st.session_state["quantidade"][i]
             return self.quantidade
 
     def getList(self):
