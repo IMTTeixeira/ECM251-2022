@@ -1,3 +1,5 @@
+# Luan Teixeira         R.A: 20.01681-6
+
 from operator import truediv
 from models.carrinho import Carrinho
 import streamlit as st

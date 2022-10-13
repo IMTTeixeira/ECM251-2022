@@ -1,3 +1,5 @@
+# Luan Teixeira         R.A: 20.01681-6
+
 import streamlit as st
 from controllers.user_controller import UserController
 from models.carrinho import Carrinho

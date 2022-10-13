@@ -1,3 +1,5 @@
+# Luan Teixeira         R.A: 20.01681-6
+
 class User():
     def __init__(self,name ,email, password) -> None:
         self.name = name

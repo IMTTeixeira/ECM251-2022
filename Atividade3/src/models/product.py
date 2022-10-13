@@ -1,3 +1,5 @@
+# Luan Teixeira         R.A: 20.01681-6
+
 class Product():
     def __init__(self,name, price, url):
         self.name = name
