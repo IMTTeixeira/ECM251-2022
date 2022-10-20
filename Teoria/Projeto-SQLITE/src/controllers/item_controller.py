@@ -24,3 +24,7 @@ class ItemController:
 
     def deletar_item(self, id) -> bool:
         return ItemDao.get_instance().deletar_item(id)
+
+    def buscar_item_nome(self, nome) -> list[Item]:
+        itens = ItemDao.get_instance().buscar_item_nome(nome)
+        return itens
