@@ -21,7 +21,10 @@ item = controller.pegar_item("CAF")
 print(item)
 
 print("*******************************************************************************")
-item = controller.pegar_item("OLA1")
+item = controller.pegar_item("OLA")
 item.nome = "RTX 4090"
 item.preco = 14990.90
 print(controller.atualizar_item(item))
+
+print("*******************************************************************************")
+print(controller.deletar_item(item.id))
