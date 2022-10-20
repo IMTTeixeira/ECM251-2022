@@ -8,7 +8,7 @@ class ItemController:
         item = ItemDao.get_instance().pegar_item(id)
         return item
 
-    def inserir_item(self, item) -> None:
+    def inserir_item(self, item) -> bool:
         try:
             ItemDao.get_instance().inserir_item(item)
         except:
@@ -18,3 +18,6 @@ class ItemController:
     def pegar_todos_itens(self) -> list[Item]:
         itens = ItemDao.get_instance().get_all()
         return itens
+
+    def atualizar_item(self, item) -> bool:
+        return ItemDao.get_instance().atualizar_item(item)

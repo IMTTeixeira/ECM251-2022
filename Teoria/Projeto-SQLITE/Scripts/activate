@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\HTNTeixeira\Desktop\ECM251-2022\Teoria\Projeto-SQLITE"
+VIRTUAL_ENV="C:\Users\20.01681-6\Desktop\ECM251-2022\Teoria\Projeto-SQLITE"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
