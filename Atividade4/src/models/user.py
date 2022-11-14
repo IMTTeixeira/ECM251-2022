@@ -1,12 +1,12 @@
 # Luan Teixeira         R.A: 20.01681-6
 
 class User():
-    def __init__(self,name ,email, password) -> None:
-        self.name = name
+    def __init__(self,nome ,email, password) -> None:
+        self.nome = nome
         self.email = email
         self.password = password
     def __str__(self) -> str:
-        return f'User(name:{self.name}, email:{self.email}, password:{self.password})'
+        return f'User(nome:{self.nome}, email:{self.email}, password:{self.password})'
 
-    def getName(self):
-        return self.name
+    def getnome(self):
+        return self.nome

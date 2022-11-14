@@ -3,28 +3,28 @@
 import streamlit as st
 from controllers.user_controller import UserController
 from models.carrinho import Carrinho
-from controllers.product_controller import ProductController
+from controllers.produto_controller import produtoController
 import time
 
 
-def criar_carrinho(product_carrinho):
+def criar_carrinho(produto_carrinho):
     st.write('__________________________________________________________')
-    for item in product_carrinho.getList():
+    for produto in produto_carrinho.getList():
         with st.container():
             colA, colB, colC, colD = st.columns(4)
             with colA:
-                st.image(image = item.url, width = 100)
+                st.image(image = produto.url, width = 100)
             with colB:
                 st.subheader("Produtos")
-                st.write(item.name)
+                st.write(produto.nome)
                 
             with colC:
                 st.subheader("Qtd.")
-                st.write(product_carrinho.getQuantidade())
+                st.write(produto_carrinho.getQuantidade())
             with colD:
                 st.metric(
                 label = "Total",
-                value = format(item.price*product_carrinho.getQuantidade(), '.2f'),
+                value = format(produto.preco*produto_carrinho.getQuantidade(), '.2f'),
                     )
         
     
@@ -36,7 +36,7 @@ try:
             st.subheader('Frete: R$ 15,00')
             st.metric(
             label = "Total da compra",
-            value = format(sum([product.price*st.session_state["carrinho"].getQuantidade() for product in st.session_state["carrinho"].getList()]) + 15, '.2f'),
+            value = format(sum([produto.preco*st.session_state["carrinho"].getQuantidade() for produto in st.session_state["carrinho"].getList()]) + 15, '.2f'),
             )
             st.selectbox(
                 label = "Escolha a forma de pagamento",

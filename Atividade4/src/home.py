@@ -4,7 +4,7 @@ from operator import truediv
 from models.carrinho import Carrinho
 import streamlit as st
 from controllers.user_controller import UserController
-from controllers.product_controller import ProductController
+from controllers.produto_controller import produtoController
 
 if "carrinho" not in st.session_state:
     st.session_state["carrinho"] = Carrinho()
@@ -12,27 +12,27 @@ if "carrinho" not in st.session_state:
 if "quantidade" not in st.session_state:
     st.session_state["quantidade"] = []
 
-def criar_produtos(product):
+def criar_produtos(produto):
     colA, colB = st.columns(2)
     with colA:
-        st.subheader(product.name)
-        st.image(image = product.url, width = 200)
+        st.subheader(produto.nome)
+        st.image(image = produto.url, width = 200)
      
     with colB:
         st.metric(
             label = "Preço",
-            value = f'R$ {product.price}'
+            value = f'R$ {produto.preco}'
         )
         quantidade = st.number_input(
             "Quantidade", 
             min_value=1, 
             max_value=100, 
             value=1, 
-            key = product.name
+            key = produto.nome
             )
-        button = st.button("Adicionar ao carrinho", key = product.url)
+        button = st.button("Adicionar ao carrinho", key = produto.url)
         if button:
-            st.session_state["carrinho"].addProduct(product)
+            st.session_state["carrinho"].addproduto(produto)
             st.session_state["quantidade"].append(quantidade)
               
 if "login" not in st.session_state:
@@ -52,8 +52,8 @@ try:
         st.subheader("Mangás em destaque")
         st.text("__________________________________________________________________________________________")   
        
-        for i in range(len(ProductController().getProducts())):
-             criar_produtos(ProductController().getProducts()[i])
+        for i in range(len(produtoController().getprodutos())):
+             criar_produtos(produtoController().getprodutos()[i])
              st.text("__________________________________________________________________________________________")
              st.write('')
              st.write('')          
