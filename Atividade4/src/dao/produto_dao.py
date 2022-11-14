@@ -15,7 +15,7 @@ class produtoDao:
 
     def _connect(self):
         try:
-            self.conn = sqlite3.connect('./database/sqlite.db')
+            self.conn = sqlite3.connect('./database/sqlite.db', check_same_thread=False)
         except:
             print('Erro ao conectar ao banco de dados')
     

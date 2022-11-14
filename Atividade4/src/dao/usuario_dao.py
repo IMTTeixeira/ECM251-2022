@@ -1,5 +1,6 @@
 import sqlite3
-from src.models.usuario import Usuario
+from models.usuario import Usuario
+import streamlit as st
 class usuarioDao:
     
     _instance = None
@@ -14,7 +15,7 @@ class usuarioDao:
         return cls._instance
 
     def _connect(self):
-        self.conn = sqlite3.connect('./databases/sqlite.db')
+        self.conn = sqlite3.connect('./database/sqlite.db', check_same_thread=False)
     
     def get_all(self):
         self.cursor = self.conn.cursor()
@@ -27,12 +28,12 @@ class usuarioDao:
         self.cursor.close()
         return resultados
 
-    def cadastrar_usuario(self, usuario):
+    def cadastrar_usuario(self, nome, email, senha):
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute("""
                 INSERT INTO Usuario (nome, email, senha) VALUES (?, ?, ?);
-            """, (usuario.nome, usuario.email, usuario.senha))
+            """, (nome, email, senha))
             self.conn.commit()
             self.cursor.close()
         except:
@@ -51,21 +52,24 @@ class usuarioDao:
         self.cursor.close()
         return usuario
 
-    def atualizar_usuario(self, usuario):
+    def atualizar_usuario(self, nome, email, senha):
         try:
-            self.cursor = self.conn.cursor()
-            self.cursor.execute(f"""
-                UPDATE Usuario SET 
-                nome = ?,
-                email = ?,
-                senha = ?
-                WHERE nome = ?;
-            """,(usuario.nome, usuario.email, usuario.senha, usuario.nome))
-            self.conn.commit()
-            self.cursor.close()
+            if st.session_state['login']:
+                nome_atual = st.session_state['nome_usuario']
+                self.cursor = self.conn.cursor()
+                self.cursor.execute(f"""
+                    UPDATE Usuario SET 
+                    nome = ?,
+                    email = ?,
+                    senha = ?
+                    WHERE nome = ?;
+                """,(nome, email, senha, nome_atual))
+                self.conn.commit()
+                self.cursor.close()
         except:
             print("Esse nome já está sendo usado por outro usuário. Tente outro.")
             return False
+        print ("Usuário atualizado com sucesso!")
         return True
 
     def deletar_usuario(self, nome):
@@ -96,15 +100,18 @@ class usuarioDao:
         except:
             print("Não foi possível encontrar nenhum usuário com esse nome.")
 
-    def checar_usuario(self, nome, senha):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute(f"""
-            SELECT * FROM Usuario
-            WHERE nome = '{nome}' AND senha = '{senha}';
-        """)
-        usuario = None
-        resultado = self.cursor.fetchone()
-        if resultado != None:
-            usuario = (usuario(nome = resultado[0], email = resultado[1], senha = resultado[2]))
-        self.cursor.close()
-        return usuario
+    def checar_login(self, nome, senha):
+        #try:
+            self.cursor = self.conn.cursor()
+            self.cursor.execute(f"""
+                SELECT * FROM Usuario
+                WHERE nome = '{nome}' AND senha = '{senha}';
+            """)
+            usuario = None
+            resultado = self.cursor.fetchone()
+            if resultado != None:
+                usuario = (Usuario(nome = resultado[0], email = resultado[1], senha = resultado[2]))
+            self.cursor.close()
+            return usuario
+        #except:
+           # print("Não foi possível realizar o login. Tente novamente.")

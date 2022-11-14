@@ -22,9 +22,9 @@ class UsuarioController():
         return usuario
 
     
-    def cadastrar_usuario(self, usuario) -> bool:
+    def cadastrar_usuario(self, nome, email, senha) -> bool:
         try:
-            usuarioDao.get_instance().cadastrar_usuario(usuario)
+            usuarioDao.get_instance().cadastrar_usuario(nome, email, senha)
         except:
             return False 
         return True
@@ -47,7 +47,15 @@ class UsuarioController():
         return usuarios
 
     def checar_login(self, nome, senha):
-        usuario = usuarioDao.get_instance().checkLogin(nome, senha)
+        usuario = usuarioDao.get_instance().checar_login(nome, senha)
         return usuario
+
+    def atualizar_usuario(self, nome, email, senha):
+        try:
+            usuarioDao.get_instance().atualizar_usuario(nome, email, senha)
+            return True
+        except:
+            print(" Erro ao atualizar usuario ")
+       
     
     
