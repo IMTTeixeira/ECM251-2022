@@ -19,7 +19,7 @@ class produtoDao:
     def get_all(self):
         self.cursor = self.conn.cursor()
         self.cursor.execute("""
-            SELECT * FROM Itens;
+            SELECT * FROM Produtos;
         """)
         resultados = []
         for resultado in self.cursor.fetchall():
@@ -30,7 +30,7 @@ class produtoDao:
     def cadastrar_produto(self, produto):
         self.cursor = self.conn.cursor()
         self.cursor.execute("""
-            INSERT INTO Itens (id, nome, preco, imagem) VALUES (?, ?, ?, ?);
+            INSERT INTO Produtos (id, nome, preco, imagem) VALUES (?, ?, ?, ?);
         """, (produto.id, produto.nome, produto.preco, produto.imagem))
         self.conn.commit()
         self.cursor.close()
@@ -38,7 +38,7 @@ class produtoDao:
     def selecionar_produto(self, id):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
-            SELECT * FROM Itens
+            SELECT * FROM Produtos
             WHERE id = '{id}';
         """)
         produto = None
@@ -52,7 +52,7 @@ class produtoDao:
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
-                UPDATE Itens SET
+                UPDATE Produtos SET
                 nome = '{produto.nome}',
                 preco = '{produto.preco}'
                 imagem = '{produto.imagem}'
@@ -68,7 +68,7 @@ class produtoDao:
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
-                DELETE FROM Itens
+                DELETE FROM Produtos
                 WHERE id = '{id}';
             """)
             self.conn.commit()
@@ -80,7 +80,7 @@ class produtoDao:
     def buscar_produto_nome(self, nome):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
-            SELECT * FROM Itens
+            SELECT * FROM Produtos
             WHERE nome LIKE '{nome}%';
         """)
         resultados = []
