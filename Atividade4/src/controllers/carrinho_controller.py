@@ -1,5 +1,5 @@
-from models.carrinho import Carrinho
 from dao.carrinho_dao import carrinhoDao
+from models.carrinho import Carrinho
 class CarrinhoController():
     def __init__(self):
         pass 

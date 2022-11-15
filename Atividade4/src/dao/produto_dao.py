@@ -34,8 +34,8 @@ class produtoDao:
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute("""
-                INSERT INTO Produtos (id, nome, preco, imagem) VALUES (?, ?, ?, ?);
-            """, (produto.id, produto.nome, produto.preco, produto.imagem))
+                INSERT INTO Produtos (nome, preco, imagem) VALUES (?, ?, ?);
+            """, (produto.nome, produto.preco, produto.imagem))
             self.conn.commit()
             self.cursor.close()
         except:

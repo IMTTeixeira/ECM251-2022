@@ -1,6 +1,5 @@
 # Luan Teixeira         R.A: 20.01681-6
 
-from controllers.carrinho_controller import CarrinhoController
 class Carrinho():
     def __init__(self, id, nome, preco, imagem, quantidade):
         self.id = id

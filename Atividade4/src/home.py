@@ -1,13 +1,15 @@
 # Luan Teixeira         R.A: 20.01681-6
 
-from models.carrinho import Carrinho
+# from models.carrinho import Carrinho
 import streamlit as st
 from controllers.usuario_controller import UsuarioController
 from controllers.produto_controller import ProdutoController
 from controllers.carrinho_controller import CarrinhoController
+from models.produto import Produto
 
 controller = ProdutoController()
 controller_carrinho = CarrinhoController()
+controller_usuario = UsuarioController()
 
 def criar_produtos():
     try:
@@ -35,7 +37,7 @@ def criar_produtos():
                         for produto in controller_carrinho.get_all_carrinho():
                             produtos_adicionados.append(produto.produto_id)
                         if produto.id not in produtos_adicionados:
-                            controller_carrinho.adicionar_carrinho(Carrinho(produto.id,produto.nome,produto.preco,produto.imagem,quantidade))
+                            controller_carrinho.adicionar_carrinho(produto, quantidade)
                             st.success('Produto adicionado ao carrinho!')
                         else:
                             quantidade_atual = controller_carrinho.get_all_carrinho()[produtos_adicionados.index(produto.id)].quantidade
@@ -51,18 +53,40 @@ if "login" not in st.session_state:
 try:
     if st.session_state.login:
         tab1, tab2 = st.tabs(["Mangás", "Cadastro de Produtos"])
-        st.title("Bem vindo à Mangá Store")
-        st.subheader("Mangás em destaque")        
-        criar_produtos()
-        
-    else:
-        col1, col2 = st.columns(2)
-        with col1:
-            st.image("https://cdn.iconscout.com/icon/free/png-256/crunchyroll-4062809-3357695.png", width = 100)
-        with col2:
-            st.title("Bem vindo a Mangá Store!")
-            st.text(" ")    
-            st.write("Para ter acesso a loja, faça o login!")
+        with tab1:
+            st.title("Bem vindo à Mangá Store")
+            st.subheader("Mangás em destaque")        
+            criar_produtos()
+
+        with tab2:
+            st.title("Cadastro de Produtos")
+            id = st.number_input(
+                label = "ID",
+                min_value = 1,
+                max_value = 100,
+                value = 1
+                )
+            nome = st.text_input(
+                label = "Nome"
+                )
+            preco = st.number_input("Preço")
+            imagem = st.text_input("Imagem")
+            novo_produto = Produto(id, nome, preco, imagem)
+            if st.button("Cadastrar"):
+                try:
+                    controller.cadastrar_produto(novo_produto)
+                    st.success("Produto cadastrado com sucesso!")
+                except:
+                    st.error("Erro ao cadastrar produto!")
             
+    else:
+            col1, col2 = st.columns(2)
+            with col1:
+                st.image("https://cdn.iconscout.com/icon/free/png-256/crunchyroll-4062809-3357695.png", width = 100)
+            with col2:
+                st.title("Bem vindo a Mangá Store!")
+                st.text(" ")    
+                st.write("Para ter acesso a loja, faça o login!")
+                
 except:
     pass
