@@ -1,10 +1,13 @@
 # Luan Teixeira         R.A: 20.01681-6
 
-from cProfile import label
 from controllers.usuario_controller import UsuarioController
+from models.usuario import Usuario
 import streamlit as st
 
 tab1, tab2, tab3 = st.tabs(["Fazer Login", "Cadastre-se", "Configurações do usuário"])
+
+if "login" not in st.session_state:
+    st.session_state["login"] = False
 
 with tab1:
     if st.session_state.login == False:
@@ -84,38 +87,55 @@ with tab2:
             st.error("As senhas não conferem!")
 
 with tab3:
-    st.image(
-            image = "https://cdn.iconscout.com/icon/free/png-256/crunchyroll-4062809-3357695.png",
-            width = 100,      
-        )
+    if st.session_state.login:
+        st.image(
+                image = "https://cdn.iconscout.com/icon/free/png-256/crunchyroll-4062809-3357695.png",
+                width = 100,      
+            )
+            
+                    
+        nome_usuario = st.text_input(
+                label = "Digite um nome de usuário (OBS: Se não quiser alterar, digite o mesmo)",
+                key = 7,
+
+            )
         
+        email_usuario = st.text_input(
+                label = "Digite um e-mail (OBS: Se não quiser alterar, digite o mesmo)",
+                key = 8,
+
+            )
                 
-    nome_usuario = st.text_input(
-            label = "Digite nome de usuário (Se não quiser alterar, escreva o mesmo)",
-            key = 7,
+        senha_usuario = st.text_input(
+                label = "Digite outra senha (OBS: Se não quiser alterar, digite a mesma)",
+                type = "password",
+                key = 9,
+                
+            )        
 
-        )
-    
-    email_usuario = st.text_input(
-            label = "Digite um e-mail (Se não quiser alterar, escreva o mesmo)",
-            key = 8,
+        confirmar_senha = st.text_input(
+                label = "Confirme a senha",
+                type = "password",
+                key = 10,
 
-        )
-            
-    senha_usuario = st.text_input(
-            label = "Digite outra senha (Se não quiser alterar, escreva a mesma)",
-            type = "password",
-            key = 9,
-            
-        )        
-    
-    if st.button("Atualizar"):
-            try:
-                usuario_controller = UsuarioController()
-                if usuario_controller.atualizar_usuario(nome_usuario, email_usuario, senha_usuario) == True:
-                    st.success("Usuário atualizado com sucesso!")
-                    st.session_state["nome_usuario"] = nome_usuario
-                    st.session_state["senha_usuario"] = senha_usuario
-            except:
-                st.error("Erro ao atualizar usuário!")
+            )
+        
+        if st.button("Atualizar"):
+                try:
+                    if senha_usuario == confirmar_senha:
+                        usuario_controller = UsuarioController()
+                        if usuario_controller.atualizar_usuario(nome_usuario, email_usuario, senha_usuario, Usuario.nome) == True:
+                            st.success("Usuário atualizado com sucesso!")
+                            st.session_state["nome_usuario"] = nome_usuario
+                            st.session_state["senha_usuario"] = senha_usuario
+                except:
+                    st.error("Erro ao atualizar usuário!")
+    else:
+        col1, col2 = st.columns(2)
+        with col1:
+            st.image("https://cdn.iconscout.com/icon/free/png-256/crunchyroll-4062809-3357695.png", width = 100)
+        with col2:
+            st.title("Bem vindo a Mangá Store!")
+            st.text(" ")    
+            st.write("Para ter acesso a loja, faça o login!")
 
