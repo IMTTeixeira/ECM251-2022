@@ -41,14 +41,14 @@ def criar_produtos():
                     if button:
                         produtos_adicionados = []
                         for produto in controller_carrinho.get_all_carrinho():
-                            produtos_adicionados.append(produto.produto_id)
+                            produtos_adicionados.append(produto.id)
                         if produto.id not in produtos_adicionados:
-                            controller_carrinho.adicionar_carrinho(produto, quantidade)
-                            st.success('Produto adicionado ao carrinho!')
+                                controller_carrinho.adicionar_carrinho(produto, quantidade)
+                                st.success('Produto adicionado ao carrinho!')
                         else:
-                            quantidade_atual = controller_carrinho.get_all_carrinho()[produtos_adicionados.index(produto.id)].quantidade
-                            controller_carrinho.get_all_carrinho()[produtos_adicionados.index(produto.id)].quantidade = quantidade_atual + quantidade
-                            st.success('Quantidade atualizada!')
+                                quantidade_atual = controller_carrinho.get_all_carrinho()[produtos_adicionados.index(produto.id)].quantidade
+                                controller_carrinho.get_all_carrinho()[produtos_adicionados.index(produto.id)].quantidade = quantidade_atual + quantidade
+                                st.success('Quantidade atualizada!')
                             
     except:
         print("Erro ao criar produtos")
