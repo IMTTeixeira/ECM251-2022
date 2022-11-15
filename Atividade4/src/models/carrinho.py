@@ -1,22 +1,13 @@
 # Luan Teixeira         R.A: 20.01681-6
 
-from controllers.produto_controller import ProdutoController
-import streamlit as st
+from controllers.carrinho_controller import CarrinhoController
 class Carrinho():
-    def __init__(self):
-        self.produtos = []
-        self.quantidade = 0
+    def __init__(self, id, nome, preco, imagem, quantidade):
+        self.id = id
+        self.nome = nome
+        self.preco = preco
+        self.imagem = imagem
+        self.quantidade = quantidade
 
-    def addproduto(self, produto):
-        if produto not in st.session_state["carrinho"].getList():
-            self.produtos.append(produto)
-        else:
-            st.error("Produto já adicionado ao carrinho!")
-    
-    def getQuantidade(self):
-        for i in range(len(self.produtos)):
-            self.quantidade = st.session_state["quantidade"][i]
-            return self.quantidade
-
-    def getList(self):
-        return self.produtos
+    def __str__ (self):
+        return f'ID: {self.id} | Nome: {self.nome} | Preço: {self.preco} | Imagem: {self.imagem} | Quantidade: {self.quantidade}'

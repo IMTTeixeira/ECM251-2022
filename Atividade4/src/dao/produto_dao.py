@@ -1,5 +1,5 @@
 import sqlite3
-from src.models.produto import Produto
+from models.produto import Produto
 class produtoDao:
     
     _instance = None
