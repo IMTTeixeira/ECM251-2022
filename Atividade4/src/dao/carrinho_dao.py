@@ -46,3 +46,11 @@ class carrinhoDao:
         """)
         self.conn.commit()
         self.cursor.close()
+
+    def remover_carrinho(self, id):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("""
+            DELETE FROM Carrinho WHERE id = ?;
+        """, (id,))
+        self.conn.commit()
+        self.cursor.close()

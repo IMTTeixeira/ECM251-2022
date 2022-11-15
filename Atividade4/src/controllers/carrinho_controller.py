@@ -22,3 +22,9 @@ class CarrinhoController():
             return carrinhoDao.get_instance().limpar_carrinho()
         except:
             raise Exception(" Erro ao limpar carrinho ")
+
+    def remover_carrinho(self, id):
+        try:
+            return carrinhoDao.get_instance().remover_carrinho(id)
+        except:
+            raise Exception(" Erro ao remover produto do carrinho ")

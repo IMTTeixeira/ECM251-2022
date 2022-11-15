@@ -115,8 +115,8 @@ def criar_carrinho():
                 value = format(produto.preco * produto.quantidade, '.2f')
                 )
 
-                if st.button('Remover', key = produto.nome):
-                    controller_carrinho.deletar_produto_carrinho(produto.id) # Ao clicar, remove produto do carrinho
+                if st.button('Remover produto', key = produto.nome):
+                    controller_carrinho.remover_carrinho(produto.id)
                     st.success('Produto removido do carrinho!')
                         
                     
