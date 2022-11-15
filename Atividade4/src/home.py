@@ -25,14 +25,20 @@ def criar_produtos():
                         label = "Preço",
                         value = f'R$ {produto.preco}'
                     )
+
                     quantidade = st.number_input(
-                        "Quantidade", 
-                        min_value=1, 
-                        max_value=100, 
-                        value=1, 
+                        "Quantidade",
+                        min_value=1,
+                        max_value=100,
+                        value=1,
                         key = produto.id
+                    )
+
+                    button = st.button(
+                        "Adicionar ao carrinho",
+                        key = produto.nome
                         )
-                    if st.button("Adicionar ao carrinho", key = produto.id):
+                    if button:
                         produtos_adicionados = []
                         for produto in controller_carrinho.get_all_carrinho():
                             produtos_adicionados.append(produto.produto_id)
@@ -42,7 +48,7 @@ def criar_produtos():
                         else:
                             quantidade_atual = controller_carrinho.get_all_carrinho()[produtos_adicionados.index(produto.id)].quantidade
                             controller_carrinho.get_all_carrinho()[produtos_adicionados.index(produto.id)].quantidade = quantidade_atual + quantidade
-                            st.success('Produto adicionado ao carrinho!')
+                            st.success('Quantidade atualizada!')
                             
     except:
         print("Erro ao criar produtos")

@@ -1,5 +1,4 @@
 # Luan Teixeira         R.A: 20.01681-6
-
 class Carrinho():
     def __init__(self, id, nome, preco, imagem, quantidade):
         self.id = id

@@ -124,7 +124,7 @@ with tab3:
                 try:
                     if senha_usuario == confirmar_senha:
                         usuario_controller = UsuarioController()
-                        if usuario_controller.atualizar_usuario(nome_usuario, email_usuario, senha_usuario, Usuario.nome) == True:
+                        if usuario_controller.atualizar_usuario(nome_usuario, email_usuario, senha_usuario):
                             st.success("Usuário atualizado com sucesso!")
                             st.session_state["nome_usuario"] = nome_usuario
                             st.session_state["senha_usuario"] = senha_usuario
