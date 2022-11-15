@@ -1,3 +1,5 @@
+# Luan Teixeira         R.A: 20.01681-6
+
 from dao.carrinho_dao import carrinhoDao
 from models.carrinho import Carrinho
 class CarrinhoController():

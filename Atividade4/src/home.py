@@ -1,6 +1,5 @@
 # Luan Teixeira         R.A: 20.01681-6
 
-# from models.carrinho import Carrinho
 import streamlit as st
 from controllers.usuario_controller import UsuarioController
 from controllers.produto_controller import ProdutoController

@@ -1,3 +1,5 @@
+# Luan Teixeira         R.A: 20.01681-6
+
 import sqlite3
 from models.carrinho import Carrinho
 
